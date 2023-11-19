@@ -22,17 +22,13 @@ public class LoginPage {
                 .shouldHave(text(loginPageTitle));
         return this;
     }
-    public LoginPage setName(String value) {
-        nameInput.sendKeys(value);
-        return this;
-    }
-    public LoginPage setEmail(String value) {
-        emailInput.sendKeys(value);
-        return this;
-    }
-    public void signup() {
+    public LoginPage login(String name, String email) {
+        nameInput.sendKeys(name);
+        emailInput.sendKeys(email);
         signupButton.click();
+        return this;
     }
+
     public void checkResult(String value) {
         signupPageLocator.shouldHave(text(value));
     }
