@@ -1,39 +1,43 @@
 package tests;
 
+import data.UserInputData;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.AccountIsDeletedPage;
 import pages.LoggedInPage;
 import pages.LoginPage;
 import pages.SignupPage;
 
-import static pages.UserInputData.*;
-
 public class RegisterUserTests extends BaseTest {
 
     @Test
-    public void successfullLoginTest() {
+    @DisplayName("Аккаунт создается и удаляется")
+    public void successfullSignUpAndAccountDeletionTest() {
 
         LoginPage loginPage = new LoginPage();
-
+        UserInputData userData = new UserInputData();
         loginPage
                 .openPageAndVerifyTitle()
-                .login(nickName, email);
+                .signUp(userData.nickName, userData.email);
         loginPage
                 .checkResult("ENTER ACCOUNT INFORMATION");
 
         SignupPage signupPage = new SignupPage();
         signupPage
                 .setGenderTitle()
-                .setPassword(password)
-                .setDateOfBirth()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setAddress(address)
-                .setCountry(country)
-                .setState(state)
-                .setCity(city)
-                .setZipcode(zipcode)
-                .setMobile(userMobile)
+                .setPassword(userData.password)
+                .setDateOfBirth(userData.yearOfBirth, userData.monthOfBirth, userData.dateOfBirth)
+                .signUpForNewsletter(true)
+                .signUpForSpecialOffers(true)
+                .setFirstName(userData.firstName)
+                .setLastName(userData.lastName)
+                .setAddress(userData.address)
+                .setCountry(userData.country)
+                .setState(userData.state)
+                .setCity(userData.city)
+                .setZipcode(userData.zipcode)
+                .setMobile(userData.userMobile)
                 .submit();
         signupPage
                 .verifyAccountIsCreated()
@@ -41,12 +45,25 @@ public class RegisterUserTests extends BaseTest {
 
         LoggedInPage loggedInPage = new LoggedInPage();
         loggedInPage
-                .verifyLoggedInAsUser(nickName)
+                .verifyLoggedInAsUser(userData.nickName)
                 .deleteAccount();
 
         AccountIsDeletedPage accountIsDeletedPage = new AccountIsDeletedPage();
         accountIsDeletedPage
                 .verifyTitle()
                 .clickContinue();
+    }
+    @Test
+    @DisplayName("Авторизация с несуществующим логином или паролем")
+    public void loginWithNonExistingEmailOrPassword() {
+        LoginPage loginPage = new LoginPage();
+        UserInputData userData = new UserInputData();
+
+        loginPage
+                .openPageAndVerifyTitle()
+                .login(userData.email, userData.password);
+        loginPage
+                .incorrectCredentialsMessageShouldAppear();
+
     }
 }
