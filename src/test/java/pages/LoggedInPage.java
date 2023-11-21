@@ -5,7 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
-import static pages.UserInputData.*;
+import static data.UserInputData.*;
 
 public class LoggedInPage {
     private SelenideElement
@@ -15,7 +15,7 @@ public class LoggedInPage {
     public LoggedInPage verifyLoggedInAsUser(String value) {
         loggedInAsLocator
                 .shouldBe(Condition.visible)
-                .shouldHave(text(nickName));
+                .shouldHave(text(value));
         return this;
     }
     public LoggedInPage deleteAccount() {
