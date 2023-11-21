@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
-import static pages.UserInputData.*;
+import static data.UserInputData.*;
 
 public class SignupPage {
    private SelenideElement
@@ -36,10 +36,10 @@ public class SignupPage {
            passwordInput.sendKeys(value);
            return this;
        }
-       public SignupPage setDateOfBirth() {
-           dayPicker.selectOption(dateOfBirth_day);
-           monthPicker.selectOption(dateOfBirth_month);
-           yearPicker.selectOption(dateOfBirth_year);
+       public SignupPage setDateOfBirth(String year, String month, String day) {
+           dayPicker.selectOption(day);
+           monthPicker.selectOption(month);
+           yearPicker.selectOption(year);
            return this;
        }
        public SignupPage signUpForNewsletter(boolean value) {

@@ -13,7 +13,7 @@ public class RandomUtils {
     }
     public static String getRandomEmail() {
         String emailDomain = "@qa.guru";
-
         return getRandomString(10) + emailDomain;
     }
+
 }
