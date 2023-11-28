@@ -98,6 +98,4 @@ public class SignupPage {
             continueButton.click();
             return this;
        }
-
-
 }

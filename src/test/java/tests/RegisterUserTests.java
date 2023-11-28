@@ -1,7 +1,6 @@
 package tests;
 
 import data.UserInputData;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.AccountIsDeletedPage;
@@ -9,10 +8,12 @@ import pages.LoggedInPage;
 import pages.LoginPage;
 import pages.SignupPage;
 
+import static com.codeborne.selenide.Selenide.*;
+
 public class RegisterUserTests extends BaseTest {
 
     @Test
-    @DisplayName("Аккаунт создается и удаляется")
+    @DisplayName("Регистрация - Аккаунт создается и удаляется")
     public void successfullSignUpAndAccountDeletionTest() {
 
         LoginPage loginPage = new LoginPage();
@@ -65,5 +66,41 @@ public class RegisterUserTests extends BaseTest {
         loginPage
                 .incorrectCredentialsMessageShouldAppear();
 
+    }
+    @Test
+    @DisplayName("Авторизация с корректным логином и паролем")
+    public void loginWithExistingEmailAndPassword() {
+        LoginPage loginPage = new LoginPage();
+        UserInputData userData = new UserInputData();
+        SignupPage signupPage = new SignupPage();
+
+        loginPage
+                .openPageAndVerifyTitle()
+                .signUp(userData.nickName, userData.email);
+        signupPage
+                .setPassword(userData.password)
+                .setDateOfBirth(userData.yearOfBirth, userData.monthOfBirth, userData.dateOfBirth)
+                .signUpForNewsletter(true)
+                .signUpForSpecialOffers(true)
+                .setFirstName(userData.firstName)
+                .setLastName(userData.lastName)
+                .setAddress(userData.address)
+                .setCountry(userData.country)
+                .setState(userData.state)
+                .setCity(userData.city)
+                .setZipcode(userData.zipcode)
+                .setMobile(userData.userMobile)
+                .submit();
+        signupPage
+                .verifyAccountIsCreated()
+                .clickContinue();
+
+        closeWebDriver();
+
+        LoginPage loginPageNew = new LoginPage();
+        loginPageNew
+                .openPageAndVerifyTitle()
+                .login(userData.email, userData.password)
+                .verifyUserIsLoggedIn(userData.nickName);
     }
 }

@@ -16,7 +16,8 @@ public class LoginPage {
             message = $("p"),
             signUpEmailInput = $("[data-qa='signup-email']"),
             signupButton = $("[data-qa='signup-button']"),
-            signupPageLocator = $(".login-form");
+            signupPageLocator = $(".login-form"),
+            loggedInAsIconLocator = $(".fa-user");
         private String loginPageTitle = "New User Signup!";
 
     public LoginPage openPageAndVerifyTitle() {
@@ -38,6 +39,10 @@ public class LoginPage {
         loginButton.click();
         return this;
     }
+    public LoginPage verifyUserIsLoggedIn(String nickName) {
+        loggedInAsIconLocator.parent().shouldHave(text(nickName));
+        return this;
+    }
 
     public void checkResult(String value) {
                 signupPageLocator.shouldHave(text(value));
@@ -45,4 +50,7 @@ public class LoginPage {
     public void incorrectCredentialsMessageShouldAppear() {
         message.shouldHave(text("Your email or password is incorrect!"));
     }
+
+
+
 }
