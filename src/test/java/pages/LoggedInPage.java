@@ -18,9 +18,9 @@ public class LoggedInPage {
                 .shouldHave(text(value));
         return this;
     }
-    public LoggedInPage deleteAccount() {
+    public AccountIsDeletedPage deleteAccount() {
         deleteAccountButton.click();
-        return this;
+        return new AccountIsDeletedPage();
     }
    }
 

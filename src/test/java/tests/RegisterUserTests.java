@@ -37,16 +37,16 @@ public class RegisterUserTests extends BaseTest {
                 .setZipcode(userData.zipcode)
                 .setMobile(userData.userMobile)
                 .submit();
+        var loggedInPage =
         signupPage
                 .verifyAccountIsCreated()
                 .clickContinue();
 
-        LoggedInPage loggedInPage = new LoggedInPage();
+var accountIsDeletedPage =
         loggedInPage
                 .verifyLoggedInAsUser(userData.nickName)
                 .deleteAccount();
 
-        AccountIsDeletedPage accountIsDeletedPage = new AccountIsDeletedPage();
         accountIsDeletedPage
                 .verifyTitle()
                 .clickContinue();

@@ -27,7 +27,6 @@ public class SignupPage {
         createdAccountLocator = $("[data-qa='account-created']"),
         continueButton = $("[data-qa='continue-button']");
 
-        private String password = "Password@1234";
         public SignupPage setGenderTitle() {
            titleMrsRadioButton.click();
            return this;
@@ -94,8 +93,11 @@ public class SignupPage {
             createdAccountLocator.shouldHave(text("ACCOUNT CREATED!"));
             return this;
        }
-       public SignupPage clickContinue() {
+       public LoggedInPage clickContinue() {
             continueButton.click();
-            return this;
+            return new LoggedInPage();
        }
+       //создать коллекцию полей и их локаторов
+         // метод для заполнения полей
+    // содать пользователя ерез апи
 }
