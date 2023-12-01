@@ -36,7 +36,7 @@ public class SignupPage {
            passwordInput.sendKeys(value);
            return this;
        }
-       public SignupPage setDateOfBirth(String year, String month, String day) {
+       public SignupPage setDateOfBirth(String day, String month, String year) {
            dayPicker.selectOption(day);
            monthPicker.selectOption(month);
            yearPicker.selectOption(year);

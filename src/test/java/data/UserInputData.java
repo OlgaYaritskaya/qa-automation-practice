@@ -16,7 +16,7 @@ public class UserInputData {
             firstName = faker.name().firstName(),
             lastName = faker.name().lastName(),
             email = getRandomEmail(),
-            dateOfBirth = String.valueOf(faker.number().numberBetween(1, 28)),
+            dayOfBirth = String.valueOf(faker.number().numberBetween(1, 28)),
             monthOfBirth = faker.options().option("January", "February", "March"),
             yearOfBirth = String.valueOf(faker.number().numberBetween(1970, 2000)),
             country = faker.options().option("India","United States","Canada","Australia","New Zealand","Singapore"),
