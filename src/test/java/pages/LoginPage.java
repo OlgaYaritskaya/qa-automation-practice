@@ -33,6 +33,10 @@ public class LoginPage {
         signupButton.click();
         return this;
     }
+    public LoginPage setFieldData(SelenideElement fieldName, String data) {
+        fieldName.sendKeys(data);
+        return this;
+    }
     public LoginPage login(String email, String pass) {
         loginEmailInput.sendKeys(email);
         loginPasswordInput.sendKeys(pass);
