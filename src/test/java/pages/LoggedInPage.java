@@ -8,9 +8,8 @@ import static com.codeborne.selenide.Selenide.*;
 import static data.UserInputData.*;
 
 public class LoggedInPage {
-    private SelenideElement
-            loggedInAsLocator = $(".nav .fa-user").parent(),
-            deleteAccountButton = $("[href='/delete_account']");
+    private SelenideElement loggedInAsLocator = $(".nav .fa-user").parent();
+    private SelenideElement deleteAccountButton = $("[href='/delete_account']");
 
     public LoggedInPage verifyLoggedInAsUser(String value) {
         loggedInAsLocator
@@ -18,9 +17,10 @@ public class LoggedInPage {
                 .shouldHave(text(value));
         return this;
     }
+
     public AccountIsDeletedPage deleteAccount() {
         deleteAccountButton.click();
         return new AccountIsDeletedPage();
     }
-   }
+}
 

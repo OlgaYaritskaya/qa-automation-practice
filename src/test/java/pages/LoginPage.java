@@ -7,18 +7,17 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class LoginPage {
-    private SelenideElement
-        pageTitleLocator = $("#form"),
-        signUpNameInput = $("[data-qa='signup-name']"),
-            loginEmailInput = $("[data-qa='login-email']"),
-            loginPasswordInput = $("[data-qa='login-password']"),
-            loginButton = $("[data-qa='login-button']"),
-            message = $("p"),
-            signUpEmailInput = $("[data-qa='signup-email']"),
-            signupButton = $("[data-qa='signup-button']"),
-            signupPageLocator = $(".login-form"),
-            loggedInAsIconLocator = $(".fa-user");
-        private String loginPageTitle = "New User Signup!";
+    private SelenideElement pageTitleLocator = $("#form");
+    private SelenideElement signUpNameInput = $("[data-qa='signup-name']");
+    private SelenideElement loginEmailInput = $("[data-qa='login-email']");
+    private SelenideElement loginPasswordInput = $("[data-qa='login-password']");
+    private SelenideElement loginButton = $("[data-qa='login-button']");
+    private SelenideElement message = $("p");
+    private SelenideElement signUpEmailInput = $("[data-qa='signup-email']");
+    private SelenideElement signupButton = $("[data-qa='signup-button']");
+    private SelenideElement signupPageLocator = $(".login-form");
+    private SelenideElement loggedInAsIconLocator = $(".fa-user");
+    private String loginPageTitle = "New User Signup!";
 
     public LoginPage openPageAndVerifyTitle() {
         open("/login");
@@ -37,7 +36,7 @@ public class LoginPage {
         fieldName.sendKeys(data);
         return this;
     }
-    public LoginPage login(String email, String pass) {
+    public LoginPage loginAs(String email, String pass) {
         loginEmailInput.sendKeys(email);
         loginPasswordInput.sendKeys(pass);
         loginButton.click();
@@ -49,7 +48,8 @@ public class LoginPage {
     }
 
     public void checkResult(String value) {
-                signupPageLocator.shouldHave(text(value));
+
+        signupPageLocator.shouldHave(text(value));
     }
     public void incorrectCredentialsMessageShouldAppear() {
         message.shouldHave(text("Your email or password is incorrect!"));
